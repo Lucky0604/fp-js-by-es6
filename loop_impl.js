@@ -29,6 +29,13 @@ const body = item => next =>
 // 将其进行抽象，我们写一个two_steps函数来组合两步操作
 const two_steps = step1 => step2 => param =>
     step2(step1(param));
+// var two_steps = function(step1) {
+//     return function(step2) {
+//         return function(param) {
+//             return step2(step1(param));
+//         }
+//     }
+// }
 
 // 上面的两行顺序执行代码就变成了
 // two_steps (body) (_ => loop_on_array(arr, body, i + 1)) (arr[i]);
@@ -41,3 +48,8 @@ const loop_on_array = arr => body => i =>
 
 // test
 loop_on_array ([1,2,3,4,5]) (item => console.log(item))(0);
+// 1
+// 2
+// 3
+// 4
+// 5
